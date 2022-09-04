@@ -99,6 +99,7 @@ function s.desreptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.Remove(g:GetFirst(),POS_FACEUP,REASON_EFFECT)
 		return true
 	else return false end
+	end
 function s.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp
 end
