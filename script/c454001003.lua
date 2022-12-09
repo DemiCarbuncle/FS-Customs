@@ -1,6 +1,6 @@
 --閃刀術式－アフターバーナー
---FS Afterburners
---Scripted by ahtelel, edited by DemiCarbuncle
+--Sky Striker Maneuver - Afterburners!
+--Scripted by ahtelel
 local s,id=GetID()
 function s.initial_effect(c)
 	--Activate
