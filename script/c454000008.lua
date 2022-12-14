@@ -1,13 +1,14 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	--xyz summon
-	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x9c),4,2)
+	Xyz.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0x1115),4,2)
 	c:EnableReviveLimit()
 	--Attributes
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
 	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e0:SetCode(ATTRIBUTE_DARK, ATTRIBUTE_LIGHT, ATTRIBUTE_WIND, ATTRIBUTE_WATER, ATTRIBUTE_FIRE, ATTRIBUTE_EARTH)
+	e0:SetCode(EFFECT_ADD_ATTRIBUTE)
+	e0:SetValue(0x2f)
 	c:RegisterEffect(e0)
 	--spsummon limit
 	local e1=Effect.CreateEffect(c)
@@ -23,7 +24,7 @@ function s.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetValue(s.immval)
-	c:RegisterEffect(e3)
+	c:RegisterEffect(e2)
 	--Cannot target other monsters for attacks
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
