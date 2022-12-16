@@ -23,12 +23,12 @@ function s.filter(c)
 	return c:IsFaceup() and c:IsSpellTrap() and not c:IsDisabled()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.filter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil) end
+	if chkc then return chkc:IsLocation(LOCATION_ONFIELD) and s.filter(chkc) and chkc~=e:GetHandler() end
+	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
-	Duel.SelectTarget(tp,s.filter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil)
+	Duel.SelectTarget(tp,s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,e:GetHandler())
 	if Duel.GetMatchingGroupCount(Card.IsSpell,tp,LOCATION_GRAVE,0,nil)>=3 then
-		e:SetCategory(CATEGORY_DISABLE)
+		e:SetCategory(CATEGORY_DISABLE+CATEGORY_DAMAGE)
 	end
 end
 function s.activate(e,tp,eg,ep,ev,re,r,rp)
@@ -54,7 +54,7 @@ function s.activate(e,tp,eg,ep,ev,re,r,rp)
 			e3:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 			tc:RegisterEffect(e3)
 		end
-		 if Duel.GetMatchingGroupCount(Card.IsSpell,tp,LOCATION_GRAVE,0,nil)>=3 then
+		 if Duel.GetMatchingGroupCount(Card.IsSpell,tp,LOCATION_GRAVE,0,nil)>=3 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 			Duel.BreakEffect()
 			Duel.Damage(1-tp,200,REASON_EFFECT)
 		end
