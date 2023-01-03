@@ -1,4 +1,3 @@
---閃刀姫-カイナ
 --Sky Striker Ace - X-001
 --Scripted by DemiCarbuncle
 
@@ -16,6 +15,8 @@ function s.initial_effect(c)
 	e1:SetDescription(aux.Stringid(id,0))
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetHintTiming(TIMING_DAMAGE_STEP)
 	e1:SetCondition(s.condition)
 	e1:SetCost(s.cost)
