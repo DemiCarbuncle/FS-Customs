@@ -12,12 +12,12 @@ function s.initial_effect(c)
 	e0:SetCode(EFFECT_ADD_ATTRIBUTE)
 	e0:SetValue(0x2f)
 	c:RegisterEffect(e0)
-	--spsummon limit
+	--spsummon condition
 	local e1=Effect.CreateEffect(c)
-	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
-	e1:SetValue(aux.xyzlimit)
+	e1:SetValue(s.splimit)
 	c:RegisterEffect(e1)
 	--Unaffected except when targeted
 	local e2=Effect.CreateEffect(c)
@@ -64,6 +64,9 @@ end
 --Cannot target other monsters for attacks
 function s.tgtg(e,c)
 	return c~=e:GetHandler()
+end
+function s.splimit(e,se,sp,st)
+	return not e:GetHandler():IsLocation(LOCATION_EXTRA) or ((st&SUMMON_TYPE_XYZ)==SUMMON_TYPE_XYZ and not se)
 end
 --Double ATK
 function s.doublecost(e,tp,eg,ep,ev,re,r,rp,chk)
