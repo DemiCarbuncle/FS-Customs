@@ -15,6 +15,9 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 s.listed_series={SET_SKY_STRIKER_ACE}
+function s.cfilter(c)
+	return c:GetSequence()<5
+end
 function s.filter(c,e,tp)
 	return c:IsSetCard(SET_SKY_STRIKER_ACE) and c:IsType(TYPE_XYZ) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
